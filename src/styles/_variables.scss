@@ -2,3 +2,17 @@
 Définition de variables Sass, par exemple :
    $color: #282c34;
 */
+$fwBold: 700;
+$fwNormal: 500;
+$fwlight: 300;
+
+$mainColor: #bb5432;
+$altColor: #f1c5b6;
+$lightColor: #fff;
+
+$fastTransition: 0.2s;
+$slowTransition: 1s;
+
+// espacement de base, qu'on utilisera partout, en le multipliant
+// si besoin
+$gutter: 0.8rem;

@@ -1,0 +1,45 @@
+@use 'src/styles/variables';
+
+.currencies {
+  text-align: left;
+  /* overflow-y : si ça dépasse en hauteur, une scrollbar s'affiche */
+  overflow-y: auto;
+  /* et pour ça il faut avoir une hauteur limitée */
+  max-height: 350px;
+  color: variables.$mainColor;
+
+  .currencies-title {
+    font-weight: variables.$fwBold;
+    padding: variables.$gutter;
+    margin-top: variables.$gutter;
+  }
+
+  .currency {
+    border-top: 1px solid variables.$altColor;
+    padding: variables.$gutter;
+    font-weight: variables.$fwNormal;
+    // si background-color change de valeur, on veut appliquer la nouvelle valeur
+    // progressivement avec la durée indiquée
+    // https://developer.mozilla.org/en-US/docs/Web/CSS/transition
+    transition: background-color variables.$slowTransition;
+
+    // si on écrivait
+    // .currency:hover {
+    // ce serait traduit en CSS par
+    // .currencies .currency .currency:hover
+    // => ne s'applique pas "currency dans currency"
+    // "La répétition du nom dans l'imbrication fait qu'on lui demande d'être son propre père" copyright Adam
+
+    // https://sass-lang.com/documentation/style-rules/parent-selector/
+    // le caractère & est remplacé par le nom du parent, sans imbriquer le parent
+    &:hover {
+      // traduit par .currencies .currency:hover
+      background-color: variables.$altColor;
+      transition: background-color variables.$fastTransition;
+    }
+  }
+
+  // .currency:hover {
+  //   background-color: variables.$altColor;
+  // }
+}

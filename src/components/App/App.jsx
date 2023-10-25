@@ -1,28 +1,43 @@
-import logo from '../../assets/logo.svg';
+/* eslint-disable react/destructuring-assignment */
+import { Component } from 'react';
+
+import Amount from '../Amount/Amount';
+import Currencies from '../Currencies/Currencies';
+import Header from '../Header/Header';
+
+import currenciesData from '../../data/currencies';
 
 import './App.scss';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedCurrency: null,
+    };
+  }
 
-        <p>
-          Edit <code>src/components/App/App.jsx</code> and save to reload.
-        </p>
+  handleCurrencySelect = (currency) => {
+    this.setState({
+      selectedCurrency: currency,
+    });
+  };
 
-        <a
-          className="App-link"
-          href="https://react.dev/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  render() {
+    return (
+      <div className="App">
+        <Header amount={currenciesData.amount} />
+        <Currencies
+          currenciesList={currenciesData.currencies}
+          onCurrencyClick={this.handleCurrencySelect}
+        />
+        <Amount
+          amount={currenciesData.amount}
+          selectedCurrency={this.state.selectedCurrency}
+        />
+      </div>
+    );
+  }
 }
 
 export default App;
